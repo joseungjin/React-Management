@@ -1,6 +1,13 @@
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Paper } from '@mui/material';
 import Customer from './components/Customer';
+import { Table, TableCell,TableRow } from '@mui/material';
+import { TableHead } from '@mui/material';
+import { TableBody } from '@mui/material';
+import { TableFooter } from '@mui/material';
+import TableContainer from '@mui/material/TableContainer';
 
 const customers =[
   {
@@ -32,7 +39,19 @@ const customers =[
 
 function App() {
   return ( 
-    <div>
+    <TableContainer component={Paper}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>번호</TableCell>
+            <TableCell>아이디</TableCell>
+            <TableCell>이름</TableCell>
+            <TableCell>생년월일</TableCell>
+            <TableCell>성별</TableCell>
+            <TableCell>직업</TableCell>
+          </TableRow>
+        </TableHead>
+      <TableBody>
       {
         customers.map(c=>{
           return(<Customer
@@ -47,7 +66,9 @@ function App() {
           );
         })
       }
-    </div>
+      </TableBody>
+      </Table>
+      </TableContainer>
   );
 }
 
