@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component,useState,useEffect } from 'react';
+import axios from "axios";
 import logo from './logo.svg';
 import './App.css';
 import { Paper } from '@mui/material';
@@ -9,35 +10,49 @@ import { TableBody } from '@mui/material';
 import { TableFooter } from '@mui/material';
 import TableContainer from '@mui/material/TableContainer';
 
-const customers =[
-  {
-    'id':1
-    ,'image':'https://placeimg.com/64/64/1'
-    ,'name':'조승진'
-    ,'birthday':'960807'
-    ,'gender':'남'
-    ,'job':'대학생'
-  },
-  {
-    'id':2
-    ,'image':'https://placeimg.com/64/64/2'
-    ,'name':'홍길동'
-    ,'birthday':'960807'
-    ,'gender':'남'
-    ,'job':'대학생'
-  },
-  {
-    'id':3
-    ,'image':'https://placeimg.com/64/64/3'
-    ,'name':'이순신'
-    ,'birthday':'960807'
-    ,'gender':'남'
-    ,'job':'대학생'
-  },
-]
+// const customers =[
+//   {
+//     'id':1
+//     ,'image':'https://placeimg.com/64/64/1'
+//     ,'name':'조승진'
+//     ,'birthday':'960807'
+//     ,'gender':'남'
+//     ,'job':'대학생'
+//   },
+//   {
+//     'id':2
+//     ,'image':'https://placeimg.com/64/64/2'
+//     ,'name':'홍길동'
+//     ,'birthday':'960807'
+//     ,'gender':'남'
+//     ,'job':'대학생'
+//   },
+//   {
+//     'id':3
+//     ,'image':'https://placeimg.com/64/64/3'
+//     ,'name':'이순신'
+//     ,'birthday':'960807'
+//     ,'gender':'남'
+//     ,'job':'대학생'
+//   },
+// ]
 
 
 function App() {
+
+  const [customers, setCustomers] = useState([]);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(
+    async() => {
+    setInterval(() => {
+      setProgress((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + 1));
+    }, 20);
+    const result = await axios.get("./api/customers");
+    setCustomers(result.data);
+  }, []);
+
+
   return ( 
     <TableContainer component={Paper}>
       <Table>
@@ -52,8 +67,7 @@ function App() {
           </TableRow>
         </TableHead>
       <TableBody>
-      {
-        customers.map(c=>{
+      {customers!=0 ? customers.map(c=>{
           return(<Customer
             key={c.id}
             id={c.id}
@@ -64,8 +78,7 @@ function App() {
             job={c.job}
           />
           );
-        })
-      }
+        }):""}
       </TableBody>
       </Table>
       </TableContainer>
