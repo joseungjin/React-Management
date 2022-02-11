@@ -9,6 +9,7 @@ import { TableHead } from '@mui/material';
 import { TableBody } from '@mui/material';
 import { TableFooter } from '@mui/material';
 import TableContainer from '@mui/material/TableContainer';
+import { CircularProgress } from '@mui/material';
 
 
 function App() {
@@ -51,7 +52,13 @@ function App() {
             job={c.job}
           />
           );
-        }):""}
+        }):
+        <TableRow>
+        <TableCell colSpan="6" align="center">
+          <CircularProgress variant="determinate" value={progress}/>
+        </TableCell>
+      </TableRow>
+        }
       </TableBody>
       </Table>
       </TableContainer>
