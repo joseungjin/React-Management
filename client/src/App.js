@@ -23,6 +23,7 @@ function App() {
       setProgress((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + 1));
     }, 20);
     const result = await axios.get("./api/customers");
+    console.log("@@@@@@@@@"+result.data);
     setCustomers(result.data);
   }, []);
 
