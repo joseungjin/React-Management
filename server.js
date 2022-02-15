@@ -17,11 +17,12 @@ const connection = mysql.createConnection({
     password:conf.password,
     port:conf.port,
     database:conf.database
-
 });
+console.log(connection);
 connection.connect();
 
 app.get('/api/customers',(req,res)=>{
+  
   connection.query(
     "SELECT * FROM CUSTOMER",
     (err,rows,fields)=>{
